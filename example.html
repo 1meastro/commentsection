@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+        <link rel="stylesheet" href="{{ url_for('static',filename='main.css')}}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/0dde8b7d98.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <title>Genlinked</title>
+    </head>
+
+    <body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+          <div class="container">
+
+              <div class="row">
+                  <form action="." method="POST">
+                      <textarea rows="4" cols="100" class="form-control" name="contents" placeholder="Enter a comment"></textarea>
+                      <br>
+                      <input type="submit" class="btn btn-success" value="Post comment">
+                  </form>
+              </div>
+  						<hr>
+  						<h1>Comments</h1>
+  						<br>
+  						{% for comment in comments %}
+              <hr>
+                  <div class="container-fluid">
+                    <div class="row frame">
+                      <div class="col-lg-8">
+                        {{ comment }}
+                      </div>
+                      <div class="col-lg-4">
+                        <a class="like"><i class="fas fa-fire"></i>
+                          <input class="qty1 button" name="qty1" readonly="readonly" type="text" value="0" />
+                        </a>
+                        <a class="dislike"><i class="fas fa-bomb"></i>
+                          <input class="qty2 button"  name="qty2" readonly="readonly" type="text" value="0" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+              {% endfor %}
+
+          </div>
+        <script type="text/javascript">
+            $(function () {
+
+                    $(".like").click(function () {
+                        var input = $(this).find('.qty1');
+                        input.val(parseInt(input.val())+ 1);
+                        input.css("color","green");
+                    });
+
+                    $(".dislike").click(function () {
+                        var input = $(this).find('.qty2');
+                        input.val(input.val() - 1);
+                        input.css("color","red");
+                    });
+                });
+        //Get the button
+        var mybutton = document.getElementById("myBtn");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+
+    </body>
+</html>
